@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
+import Introduction from './components/Introduction';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [showIntroduction, setShowIntroduction] = useState(true);
   const fileInputRef = useRef(null);
 
   const toggleSidebar = () => {
@@ -20,6 +22,10 @@ function App() {
       console.log('Uploaded files:', files);
       // You can add your file processing logic here
     }
+  };
+
+  const handleIntroductionClose = () => {
+    setShowIntroduction(false);
   };
 
   return (
@@ -83,7 +89,13 @@ function App() {
       
       <div className="main-content">
         <div className="center-content">
-          {/* Center content will go here */}
+          {showIntroduction ? (
+            <Introduction onClose={handleIntroductionClose} />
+          ) : (
+            <div className="main-content-placeholder">
+              {/* Your main content will go here */}
+            </div>
+          )}
         </div>
         
         <div className="search-container">
